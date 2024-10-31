@@ -1,0 +1,13 @@
+https://gomakethings.com/the-handleevent-method-is-the-absolute-best-way-to-handle-events-in-web-components/
+https://gomakethings.com/custom-events-in-web-components/
+https://dev.to/joanllenas/web-components-composition-techniques-1997#the-raw-part-endraw-and-raw-exportparts-endraw-attributes
+https://github.com/joanllenas/web-components-article
+
+
+
+https://www.hjorthhansen.dev/shadow-dom-and-forms/
+https://nolanlawson.com/2021/08/15/does-shadow-dom-improve-style-performance/
+
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment
+https://developer.chrome.com/blog/css-containment?hl=pl

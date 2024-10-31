@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+:host::part(content) {
+  display: none;
+  flex-direction: column;
+  margin-top: var(--gap-sm);
+  /*border: var(--border-high-contrast);*/
+}
+
+:host([open])::part(content) {
+  display: flex;
+}
+
+
+:host::part(container) {
+  width: max-content;
+  background-color: var(--background-low-contrast);
+  color: var(--text-high-contrast);
+  font-size: var(--font-sm);
+}
