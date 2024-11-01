@@ -2,7 +2,6 @@
 import { addGlobalStylesToShadowRoot } from '../globalstyles/GlobalStyles.js';
 
 
-
 class TextInput extends HTMLElement {
 
     static formAssociated = true;
@@ -19,14 +18,17 @@ class TextInput extends HTMLElement {
     }
 
     get value() { return this.input.value; }
-    set value(val) { this.input.value = val; }
+    set value(val) {
+        this.input.value = val;
+        this.internals_.setFormValue(value);
+    }
 
     get placeholder() { return this.getAttribute("placeholder"); }
     set placeholder(val) { this.setAttribute("placeholder", val); }
 
     get form() { return this.internals_.form; }
     get name() { return this.getAttribute('name'); }
-    get type() { return this.localName; }
+    get type() { return this.internals_; }
     get validity() { return this.internals_.validity; }
     get validationMessage() { return this.internals_.validationMessage; }
     get willValidate() { return this.internals_.willValidate; }
@@ -34,10 +36,12 @@ class TextInput extends HTMLElement {
     connectedCallback() {
         this.render();
         this.input.addEventListener('change', this);
+        this.input.addEventListener('input', this);
     }
 
     disconnectedCallback() {
         this.input.removeEventListener('change', this);
+        this.input.addEventListener('input', this);
     }
 
     attributeChangedCallback(property, oldValue, newValue) {
@@ -69,7 +73,7 @@ class TextInput extends HTMLElement {
     }
 
     formAssociatedCallback(form) {
-        console.log('form associated:', form.id);
+        console.log('form associated:',  this.internals_.form);
     }
 
     handleEvent(event) {
@@ -77,7 +81,6 @@ class TextInput extends HTMLElement {
     }
 
     onchange(event) {
-
         this.onUpdateValue()
 
         this.dispatchEvent(
@@ -90,19 +93,20 @@ class TextInput extends HTMLElement {
         );
     }
 
+    oninput(event) {
+        console.log(event)
+    }
+
     onUpdateValue() {
         if (this.value == '') {
             this.internals_.setValidity({ customError: true }, 'Value cannot be negative.');
 
         }
         else {
-
             this.internals_.setValidity({});
         }
-
         this.internals_.setFormValue(this.value);
     }
-
 }
 
 customElements.define("text-input", TextInput);

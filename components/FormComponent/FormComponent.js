@@ -1,17 +1,17 @@
 // Plik: FormComponent.js
 import { addGlobalStylesToShadowRoot } from '../globalstyles/GlobalStyles.js';
 
-const template = document.createElement('template');
-template.innerHTML = /* html */ `
+/*const template = document.createElement('template');
+template.innerHTML = `
   <style>
     @import "/components/FormComponent/FormComponent.css";
     form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 10rem;
     }
   </style>
-  <form id="Test">
+  <form>
     <slot></slot>
     <button type="submit" class="btn btn-sm btn-primary">Submit</button>
   </form>
@@ -37,8 +37,6 @@ class FormComponent extends HTMLElement {
         // Pobieramy wszystkie pola typu TextInput wewnątrz formularza
         const inputs = this.querySelectorAll('text-input');
 
-
-
         // Sprawdzamy, czy każde pole ma wartość
         let valid = true;
         inputs.forEach((input) => {
@@ -62,7 +60,6 @@ class FormComponent extends HTMLElement {
         } else {
             console.log('Formularz jest nieprawidłowy');
         }
-
     }
 
     // Funkcja do zebrania danych z formularza
@@ -74,5 +71,25 @@ class FormComponent extends HTMLElement {
         return formData;
     }
 }
+
+customElements.define('form-component', FormComponent);
+
+*/
+
+class FormComponent extends HTMLElement {
+    constructor() {
+        super()
+    }
+
+    connectedCallback() {
+        this.form = document.createElement('form');
+        while (this.firstChild) {
+            this.form.appendChild(this.firstChild);
+        }
+
+        this.appendChild(this.form)
+    }
+}
+
 
 customElements.define('form-component', FormComponent);
