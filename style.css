@@ -91,3 +91,12 @@ my-dropdown-option:last-child::part(container) {
   border-bottom-right-radius: var(--border-radius-sm);
 }
 */
+
+body {
+  opacity: 0;
+}
+
+body.ready {
+  opacity: 1;
+  transition: .25s opacity;
+}

@@ -4,7 +4,4 @@
 
 :host::part(container) {
   width: max-content;
-  background-color: var(--background-low-contrast);
-  color: var(--text-high-contrast);
-  font-size: var(--font-sm);
 }

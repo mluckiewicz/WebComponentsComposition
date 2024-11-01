@@ -11,3 +11,9 @@ https://nolanlawson.com/2021/08/15/does-shadow-dom-improve-style-performance/
 
 https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment
 https://developer.chrome.com/blog/css-containment?hl=pl
+
+
+
+
+Miganie komponentu przy wyświetlaniu strony.
+https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/

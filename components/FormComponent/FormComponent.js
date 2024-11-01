@@ -11,9 +11,9 @@ template.innerHTML = /* html */ `
       gap: 1rem;
     }
   </style>
-  <form>
+  <form id="Test">
     <slot></slot>
-    <submit-button>Submit</submit-button>
+    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
   </form>
 `;
 
@@ -23,15 +23,12 @@ class FormComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
         addGlobalStylesToShadowRoot(this.shadowRoot);
-
         this.form = this.shadowRoot.querySelector('form');
     }
 
     connectedCallback() {
-        const submitButton = this.shadowRoot.querySelector('submit-button');
-
         // Dodajemy nasłuchiwanie kliknięcia w przycisk submit
-        submitButton.addEventListener('submit-click', (event) => this.onSubmit(event));
+        this.form.addEventListener('submit', (event) => this.onSubmit(event));
     }
 
     onSubmit(event) {
@@ -39,6 +36,8 @@ class FormComponent extends HTMLElement {
 
         // Pobieramy wszystkie pola typu TextInput wewnątrz formularza
         const inputs = this.querySelectorAll('text-input');
+
+
 
         // Sprawdzamy, czy każde pole ma wartość
         let valid = true;
@@ -63,6 +62,7 @@ class FormComponent extends HTMLElement {
         } else {
             console.log('Formularz jest nieprawidłowy');
         }
+
     }
 
     // Funkcja do zebrania danych z formularza
