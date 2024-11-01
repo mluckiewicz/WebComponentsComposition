@@ -17,7 +17,7 @@ class DropdawnContainer extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
-        this.shadowRoot.host.setAttribute("exportparts", "container, container1");
+        this.shadowRoot.host.setAttribute("exportparts", "container");
         this.shadowRoot.appendChild(template.content.cloneNode(true));
         addGlobalStylesToShadowRoot(this.shadowRoot)
     }

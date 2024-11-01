@@ -31,7 +31,7 @@ class Dropdown extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
-        this.shadowRoot.host.setAttribute("exportparts", "options");
+        this.shadowRoot.host.setAttribute("exportparts", "content");
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
@@ -43,7 +43,9 @@ class Dropdown extends HTMLElement {
         this.shadowRoot
             .querySelector("toggle-button")
             .addEventListener("click", () => { this.toggle() });
-        this.addEventListener("myDropdownOptionClick", (event) => { this.optionClickHandler(event) });
+
+        this.addEventListener("formSubmit", (event) => { this.optionClickHandler(event) });
+        document.addEventListener("click", (event) => {this.handleClickOutside(event) } );
     }
 
     optionClickHandler(event) {
@@ -52,7 +54,7 @@ class Dropdown extends HTMLElement {
         this.open = false;
 
         this.dispatchEvent(
-            new CustomEvent("myDropdownChange", {
+            new CustomEvent("dropdownClosed", {
                 detail: event,
             })
         );
@@ -62,6 +64,14 @@ class Dropdown extends HTMLElement {
     toggle() {
         this.open = !this.open;
         this.render();
+    }
+
+    handleClickOutside(event) {
+        // Sprawdzenie, czy kliknięcie miało miejsce poza komponentem
+        if (!this.contains(event.target) && this.open) {
+            this.open = false;
+            this.render();
+        }
     }
 
     render() {
