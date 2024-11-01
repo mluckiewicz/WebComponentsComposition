@@ -1,33 +1,18 @@
 // Plik: FormComponent.js
-import { addGlobalStylesToShadowRoot } from '../globalstyles/GlobalStyles.js';
-
-/*const template = document.createElement('template');
-template.innerHTML = `
-  <style>
-    @import "/components/FormComponent/FormComponent.css";
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 10rem;
-    }
-  </style>
-  <form>
-    <slot></slot>
-    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-  </form>
-`;
-
 class FormComponent extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
-        addGlobalStylesToShadowRoot(this.shadowRoot);
-        this.form = this.shadowRoot.querySelector('form');
     }
 
     connectedCallback() {
-        // Dodajemy nasłuchiwanie kliknięcia w przycisk submit
+        /*
+        Form must be in DOM to not break default functionalities
+        Transfer all child nodes from host element to an form.
+        */
+        this.form = document.createElement('form');
+        this.form.append(...this.childNodes)
+
+        this.appendChild(this.form)
         this.form.addEventListener('submit', (event) => this.onSubmit(event));
     }
 
@@ -71,25 +56,5 @@ class FormComponent extends HTMLElement {
         return formData;
     }
 }
-
-customElements.define('form-component', FormComponent);
-
-*/
-
-class FormComponent extends HTMLElement {
-    constructor() {
-        super()
-    }
-
-    connectedCallback() {
-        this.form = document.createElement('form');
-        while (this.firstChild) {
-            this.form.appendChild(this.firstChild);
-        }
-
-        this.appendChild(this.form)
-    }
-}
-
 
 customElements.define('form-component', FormComponent);

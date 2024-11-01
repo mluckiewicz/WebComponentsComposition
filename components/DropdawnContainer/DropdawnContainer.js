@@ -6,7 +6,7 @@ template.innerHTML = /* html */ `
         @import "/components/DropdawnContainer/DropdawnContainer.css";
     </style>
     <div part="container" class="card">
-        <div class="card-body p-2">
+        <div part="content" class="card-body p-2">
             <slot></slot>
         </div>
     </div>

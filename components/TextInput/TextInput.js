@@ -56,10 +56,11 @@ class TextInput extends HTMLElement {
                 @import "/components/TextInput/TextInput.css";
             </style>
             <div>
-                <label class="form-label" for="textInput">
+                <label part="label" class="form-label" for="textInput">
                     <slot name="label"></slot>
                 </label>
                 <input
+                    part="input"
                     type="text"
                     class="form-control form-control-sm"
                     placeholder="${this.placeholder}"

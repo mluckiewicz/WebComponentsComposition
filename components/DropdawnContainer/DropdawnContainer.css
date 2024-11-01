@@ -3,5 +3,21 @@
 }
 
 :host::part(container) {
+  display: grid;
   width: max-content;
+}
+
+
+:host::part(content) {
+  width: 100%; /* Wypełnia rodzica */
+  width: max-content;
+  transition: width 1s ease; /* Płynna zmiana szerokości */
+}
+
+
+:host::part(content)::after {
+  content: '';
+  display: block;
+  height: 0; /* Zabezpieczenie przed niechcianym przepełnieniem */
+  visibility: hidden; /* Ukrycie pseudo-elementu */
 }
